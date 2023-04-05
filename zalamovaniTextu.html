@@ -6,8 +6,8 @@
 
     <body>
         <input type="text" id="input">
-        <button id="button" onclick="">Start</button>
-        <div></div>
+        <button id="button" onclick=zalamujBezMezer()>Bez mezet</button>
+        <div id="output"></div>
 
     </body>
 
@@ -15,8 +15,16 @@
     </style>
 
     <script>
-        const INPUT = document.getElementById("input").value
+        var zalamujBezMezer = () => {
+            var input = document.getElementById("input").value
+            var arr = []
 
+            for (let i = 0; i < input.length; i+=20) {
+                arr.push(input.slice(i, i+20))
+            }
+            output = arr.join("<br>")
+            document.getElementById("output").innerHTML = output
+        }
 
 
     </script>
