@@ -6,7 +6,8 @@
 
     <body>
         <input type="text" id="input">
-        <button id="button" onclick=zalamujBezMezer()>Bez mezet</button>
+        <button id="button" onclick=zalamujBezMezer()>Bez mezer</button>
+        <button id="button" onclick=zalamuj()>S mezerama</button>
         <div id="output"></div>
 
     </body>
@@ -26,6 +27,24 @@
             document.getElementById("output").innerHTML = output
         }
 
+        var zalamuj = () => {
+            var input = document.getElementById("input").value
+            var arr = input.split(" ")
+
+            var pocetZnakuNaRadku = 0
+            var index = 0
+            for (const slovo of arr) {
+                pocetZnakuNaRadku += slovo.length + 1
+                if(pocetZnakuNaRadku >= 20) {
+                    arr.splice(index, 0, "<br>")
+                    pocetZnakuNaRadku = 0
+                }
+                index++
+            }
+
+            output = arr.join(" ")
+            document.getElementById("output").innerHTML = output
+        }
 
     </script>
 </head>
