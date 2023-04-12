@@ -13,36 +13,61 @@
     </body>
 
     <style>
+        #output {
+            font-family: monospace;
+            font-size: 15px;
+        }
+
     </style>
 
     <script>
+        const maxDelkaRadky = 100
+
         var zalamujBezMezer = () => {
-            var input = document.getElementById("input").value
+            const input = document.getElementById("input").value
             var arr = []
 
-            for (let i = 0; i < input.length; i+=20) {
-                arr.push(input.slice(i, i+20))
+            for (let i = 0; i < input.length; i+=maxDelkaRadky) {
+                arr.push(input.slice(i, i+maxDelkaRadky))
             }
             output = arr.join("<br>")
             document.getElementById("output").innerHTML = output
         }
 
         var zalamuj = () => {
-            var input = document.getElementById("input").value
+            const input = document.getElementById("input").value
             var arr = input.split(" ")
-
+            var outputArr = []
             var pocetZnakuNaRadku = 0
             var index = 0
             for (const slovo of arr) {
-                pocetZnakuNaRadku += slovo.length + 1
-                if(pocetZnakuNaRadku >= 20) {
-                    arr.splice(index, 0, "<br>")
-                    pocetZnakuNaRadku = 0
+                if(slovo.length > maxDelkaRadky) {
+                    outputArr.push("<br>")
+                    for(i = maxDelkaRadky; i < slovo.length+maxDelkaRadky; i+=maxDelkaRadky-1) {
+                        if(i < slovo.length) {
+                            outputArr.push(slovo.slice(i-maxDelkaRadky, i) + "-")
+                            outputArr.push("<br>")
+                        }
+                        else {
+                            outputArr.push(slovo.slice(i-maxDelkaRadky, i))
+                            pocetZnakuNaRadku += slovo.slice(i-maxDelkaRadky, i).length + 1
+                        }
+                    }
                 }
-                index++
+                else {
+                    pocetZnakuNaRadku += slovo.length + 1
+                    if(pocetZnakuNaRadku >= maxDelkaRadky) {
+                        outputArr.push("<br>")
+                        outputArr.push(slovo)
+                        pocetZnakuNaRadku = slovo.length + 1
+                    }
+                    else {
+                        outputArr.push(slovo)
+                    }
+                }                
             }
 
-            output = arr.join(" ")
+            output = outputArr.join(" ")
             document.getElementById("output").innerHTML = output
         }
 
