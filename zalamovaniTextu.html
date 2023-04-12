@@ -14,14 +14,14 @@
 
     <style>
         #output {
-            font-family: monospace;
-            font-size: 15px;
+            font-family: serif;
+            font-size: 20px;
         }
 
     </style>
 
     <script>
-        const maxDelkaRadky = 100
+        const maxDelkaRadky = 200
 
         var zalamujBezMezer = () => {
             const input = document.getElementById("input").value
@@ -65,6 +65,10 @@
                         outputArr.push(slovo)
                     }
                 }                
+            }
+
+            if(outputArr[0] == "<br>") {
+                outputArr.shift()
             }
 
             output = outputArr.join(" ")
