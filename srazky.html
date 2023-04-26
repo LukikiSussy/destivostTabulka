@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8" />
+    <title>Titulek</title>
+ 
+    <style>
+ 
+    </style>
+ 
+
+    <script> 
+        var dataArr;
+        var dataObj = {};
+        function loadData() {
+            data = document.getElementById("input").value;
+            dataArr = data.split("\n");
+            for (let i = 0; i < dataArr.length; i++) {
+                dataArr[i] = dataArr[i].split(";");
+            }
+            var dateReg = /^\d{2}.\d{2}.\d{4}/;
+            dataObj.dny = {};
+            for (let i = 0; i < dataArr.length; i++) {
+                if (dataArr[i][0].match(dateReg) != null) {
+                    dataObj.dny[dataArr[i].shift()] = dataArr[i].join("@").replace(/,/g, ".").split("@");
+                }                
+            }
+            dataArr[0].shift();
+            dataObj.staniceList = dataArr[0];
+
+            dataObj.stanice = {};
+            for (let i = 0; i < dataObj.staniceList.length; i++) {
+                dataObj.stanice[dataObj.staniceList[i]] = [];
+                for(const den in dataObj.dny) {
+                    dataObj.stanice[dataObj.staniceList[i]].push(dataObj.dny[den][i]);
+                }
+            }
+
+            let max = -Infinity;
+            for (const den in dataObj.dny) {
+                for (let i = 0; i < dataObj.dny[den].length; i++) {
+                    let destivost = parseFloat(dataObj.dny[den][i]);
+                    if (destivost > max) {
+                        max = destivost;
+                    }
+                }
+            }
+
+            console.log(max);
+        }
+    </script>
+</head>
+ 
+<body>
+ 
+    <textarea name="input" id="input"></textarea>
+    <button onclick=loadData()>sumbit</button>
+</body>
+</html>
+
