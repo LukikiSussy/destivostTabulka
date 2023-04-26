@@ -13,6 +13,7 @@
         var dataArr;
         var dataObj = {};
         function loadData() {
+            //nacitani dat a rozdelovani na radky a jednotlive hodnoty
             data = document.getElementById("input").value;
             dataArr = data.split("\n");
             for (let i = 0; i < dataArr.length; i++) {
@@ -22,6 +23,7 @@
             dataObj.dny = {};
             for (let i = 0; i < dataArr.length; i++) {
                 if (dataArr[i][0].match(dateReg) != null) {
+                    //pridavani dnu, premena carek na tecky, aby to byl float
                     dataObj.dny[dataArr[i].shift()] = dataArr[i].join("@").replace(/,/g, ".").split("@");
                 }                
             }
@@ -36,6 +38,7 @@
                 }
             }
 
+            // nejdestivejsi den
             let maxDen = -Infinity;
             let nejdestivejsiDen;
             for (const den in dataObj.dny) {
@@ -51,6 +54,7 @@
                 }
             }
 
+            //nejdestivejsi stanice
             let maxSt = -Infinity;
             let nejdestivejsiStanice;
             for (const stanice in dataObj.stanice) {
