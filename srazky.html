@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
     <meta charset="utf-8" />
     <title>Titulek</title>
- 
-    <style>
- 
-    </style>
- 
 
-    <script> 
+    <style>
+        .text {
+            position: relative;
+            font-size: 70px;
+            font-weight: 600;
+
+            background-image: url(https://media.tenor.com/jUMex_rdqPwAAAAM/among-us-twerk.gif);
+            background-size: 25px;
+
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+        }
+    </style>
+
+
+    <script>
         var dataArr;
         var dataObj = {};
         function loadData() {
@@ -25,7 +37,7 @@
                 if (dataArr[i][0].match(dateReg) != null) {
                     //pridavani dnu, premena carek na tecky, aby to byl float
                     dataObj.dny[dataArr[i].shift()] = dataArr[i].join("@").replace(/,/g, ".").split("@");
-                }                
+                }
             }
             dataArr[0].shift();
             dataObj.staniceList = dataArr[0];
@@ -33,7 +45,7 @@
             dataObj.stanice = {};
             for (let i = 0; i < dataObj.staniceList.length; i++) {
                 dataObj.stanice[dataObj.staniceList[i]] = [];
-                for(const den in dataObj.dny) {
+                for (const den in dataObj.dny) {
                     dataObj.stanice[dataObj.staniceList[i]].push(dataObj.dny[den][i]);
                 }
             }
@@ -70,16 +82,22 @@
                 }
             }
 
-            console.log(maxDen, nejdestivejsiDen);
-            console.log(maxSt, nejdestivejsiStanice);
+            //console.log(maxDen, nejdestivejsiDen);
+            //console.log(maxSt, nejdestivejsiStanice);
+
+            document.getElementById("nejDen").innerHTML = `nejdeštivější den: ${nejdestivejsiDen}`
+            document.getElementById("nejStan").innerHTML = `nejdeštivější stanice: ${nejdestivejsiStanice}`
         }
     </script>
 </head>
- 
+
 <body>
- 
+
     <textarea name="input" id="input"></textarea>
     <button onclick=loadData()>sumbit</button>
-</body>
-</html>
 
+    <div class="text" id="nejDen">nejdeštivější den: </div>
+    <div class="text" id="nejStan">nejdeštivější stanice: </div>
+</body>
+
+</html>
