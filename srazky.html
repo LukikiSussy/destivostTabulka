@@ -36,17 +36,38 @@
                 }
             }
 
-            let max = -Infinity;
+            let maxDen = -Infinity;
+            let nejdestivejsiDen;
             for (const den in dataObj.dny) {
+                let destivostPrumer = 0;
                 for (let i = 0; i < dataObj.dny[den].length; i++) {
                     let destivost = parseFloat(dataObj.dny[den][i]);
-                    if (destivost > max) {
-                        max = destivost;
-                    }
+                    destivostPrumer += destivost;
+                }
+                destivostPrumer = destivostPrumer / dataObj.dny[den].length;
+                if (destivostPrumer > maxDen) {
+                    maxDen = destivostPrumer;
+                    nejdestivejsiDen = den;
                 }
             }
 
-            console.log(max);
+            let maxSt = -Infinity;
+            let nejdestivejsiStanice;
+            for (const stanice in dataObj.stanice) {
+                let destivostPrumer = 0;
+                for (let i = 0; i < dataObj.stanice[stanice].length; i++) {
+                    let destivost = parseFloat(dataObj.stanice[stanice][i]);
+                    destivostPrumer += destivost;
+                }
+                destivostPrumer = destivostPrumer / dataObj.stanice[stanice].length;
+                if (destivostPrumer > maxSt) {
+                    maxSt = destivostPrumer;
+                    nejdestivejsiStanice = stanice;
+                }
+            }
+
+            console.log(maxDen, nejdestivejsiDen);
+            console.log(maxSt, nejdestivejsiStanice);
         }
     </script>
 </head>
