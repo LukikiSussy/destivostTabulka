@@ -1,2 +1,2 @@
 # zalamovaniTextu
-program ktery zalamuje text (duh), zmenit const "maxDelkaRadky" pro jinou delku radky
+convertovani csv tabulky na object (json) a urcovani max hodnot dnu a stanic
